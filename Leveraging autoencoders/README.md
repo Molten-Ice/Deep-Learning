@@ -170,7 +170,7 @@ The issue was the output's from the last layer of the Neurual network were unbou
 To combat this I retricted the last layer to the range [0,255], with the results of the two methods shown below.
 
 After 250 epochs
-# ReLU(with clamp) gives loss: 1154.6481
-# Sigmoid(with x 255) gives loss: 2036.6487
+ReLU(with clamp) gives loss: 1154.6481
+Sigmoid(with x 255) gives loss: 2036.6487
 
 ![V7](/Leveraging%20autoencoders/Images/autoencoderV7.png)
