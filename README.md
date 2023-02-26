@@ -141,3 +141,19 @@ Didn't improve over the next 950 epochs.
 ```
 
 ![V4](/Images/autoencoderV4.png)
+
+#### V5
+
+Currently the issue I am facing is exploding loss.
+30 epocds in it is down to 0.0636, then goes
+0.0636->0.173->0.14432->0.1317->39.58->149.78->0.8528->0.15
+
+I think the reason of this is due to some numerical instability (close to /0) which causes huge updates in backpropagation.
+
+
+Adding normalizion to the inputs, instead of just / 255. the input.
+```
+self.encoder = nn.Sequential(
+            nn.BatchNorm1d(num_features = 784, affine = False),
+            nn.Linear(in_features=784,
+```
