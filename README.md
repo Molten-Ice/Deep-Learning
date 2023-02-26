@@ -33,3 +33,27 @@ Trained over 1000 batches of 32 elements & 5 epochs.
 
 loss 0.1368 -> 0.0625
 ![V1](/Images/autoencoderV1.png)
+
+##### V2
+
+Adding non-linearity 
+```
+self.encoder = nn.Sequential(
+            nn.Linear(in_features=784,
+                      out_features=hidden_units),
+            nn.Sigmoid(),
+            nn.Linear(in_features = hidden_units,
+                      out_features = bottleneck)
+        )
+        self.decoder = nn.Sequential(
+            nn.Linear(in_features=bottleneck,
+                      out_features=hidden_units),
+            nn.Sigmoid(),
+            nn.Linear(in_features = hidden_units,
+                      out_features = 784),
+            nn.Sigmoid()
+        )
+```
+Trained over 1000 batches of 32 elements & 5 epochs
+Loss 0.2375->0.0746
+![V2](/Images/autoencoderV2.png)
