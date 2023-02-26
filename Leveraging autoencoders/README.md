@@ -23,7 +23,7 @@ self.encoder = nn.Sequential(
 Trained over 1000 batches of 32 elements & 5 epochs.
 
 loss 0.1368 -> 0.0625
-![V1](/Images/autoencoderV1.png)
+![V1](/Leveraging%20autoencoders/Images/autoencoderV1.png)
 
 #### V2
 
