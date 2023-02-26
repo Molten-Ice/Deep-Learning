@@ -91,3 +91,53 @@ Plateaued 40 epochs in, reaching 0.0673 (i.e the same as the old models).
 Didn't improve over the next 950 epochs.
 
 ![V3](/Images/autoencoderV3.png)
+
+#### V4
+
+- Adding batchnorm
+- Reshaping neural network (making it much much smaller)
+- Changed Adam parameters
+- Decreased lr decay
+
+``` 
+      l1 = 128
+        l2 = 64
+        l3 = 32
+        bottleneck = 16
+        
+        self.encoder = nn.Sequential(
+            nn.Linear(in_features=784,
+                      out_features=l1),
+            nn.BatchNorm1d(num_features = l1, affine = False),
+            nn.Linear(in_features = l1,
+                      out_features = l2),
+            nn.ReLU(),
+            nn.BatchNorm1d(num_features = l2, affine = False),
+            nn.Linear(in_features = l2,
+                      out_features = l3),
+            nn.ReLU(),
+            nn.BatchNorm1d(num_features = l3, affine = False),
+            nn.Linear(in_features = l3,
+                      out_features = bottleneck),
+            nn.BatchNorm1d(num_features = bottleneck)
+        )
+        self.decoder = nn.Sequential(
+            nn.Linear(in_features=bottleneck,
+                      out_features=l3),
+            nn.ReLU(),
+            nn.BatchNorm1d(num_features = l3, affine = False),
+            nn.Linear(in_features=l3,
+                      out_features=l2),
+            nn.ReLU(),
+            nn.BatchNorm1d(num_features = l2, affine = False),
+            nn.Linear(in_features = l2,
+                      out_features = l1),
+            nn.ReLU(),
+            nn.BatchNorm1d(num_features = l1, affine = False),
+            nn.Linear(in_features = l1,
+                      out_features = 784),
+            nn.ReLU()
+        )
+```
+
+![V4](/Images/autoencoderV4.png)
