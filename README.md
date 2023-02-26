@@ -157,3 +157,5 @@ self.encoder = nn.Sequential(
             nn.BatchNorm1d(num_features = 784, affine = False),
             nn.Linear(in_features=784,
 ```
+
+![V5](/Images/autoencoderV5.png)
