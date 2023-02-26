@@ -159,3 +159,8 @@ self.encoder = nn.Sequential(
 ```
 
 ![V5](/Images/autoencoderV5.png)
+
+#### V6
+
+Insanely good predictions (using bottleneck of 10), but awful loss. (literally reaches 1400, then goes to a 18 digit long number). 
+I think this is as its predicting the correct pixels but the values it finds for them is unbounded (as the last function is ReLU)
