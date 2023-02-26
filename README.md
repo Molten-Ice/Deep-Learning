@@ -164,3 +164,18 @@ self.encoder = nn.Sequential(
 
 Insanely good predictions (using bottleneck of 10), but awful loss. (literally reaches 1400, then goes to a 18 digit long number). 
 I think this is as its predicting the correct pixels but the values it finds for them is unbounded (as the last function is ReLU)
+
+Epoch: 181 | Train loss: 874721216.0000 | Test loss: 372588722165645312.0000 | Learning rate: 0.0125
+
+![V6](/Images/autoencoderV6.png)
+
+#### V7 (Working)
+
+The issue was the output's from the last layer of the Neurual network were unbounded. The last ReLU layer meant there was no upper bound, which caused an exploding gradient issue (I think).
+To combat this I retricted the last layer to the range [0,255], with the results of the two methods shown below.
+
+After 250 epochs
+# ReLU(with clamp) gives loss: 1154.6481
+# Sigmoid(with x 255) gives loss: 2036.6487
+
+![V7](/Images/autoencoderV7.png)
