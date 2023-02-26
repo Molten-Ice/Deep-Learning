@@ -12,8 +12,9 @@ Following course: [learnpytorch.io](https://www.learnpytorch.io/)
 
 #### Autoencoder
 Started 25/02/2023
-Want to replicate MNIST wieth a high accuracy using a bottleneck of 10 nodes
+Want to replicate MNIST with a high accuracy using a bottleneck of 10 nodes
 
+##### V1
 ```
 self.encoder = nn.Sequential(
             nn.Linear(in_features=784,
@@ -28,6 +29,7 @@ self.encoder = nn.Sequential(
                       out_features = 784)
         )
 ```
-V1
+Trained over 1000 batches of 32 elements & 5 epochs.
+
 loss 0.1368 -> 0.0625
 ![V1](/Images/autoencoderV1.png)
