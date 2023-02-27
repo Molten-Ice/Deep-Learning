@@ -1,8 +1,8 @@
 # Leveraging an autoencoder to utilize unlabelled data
 
-## Finished result
+[Autoencoder Development](## Autoencoder Development)
 
-![Finished](/Leveraging%20autoencoders/Images/autoencoderV7.png)
+[Adding Neural network for predictions](## Adding Neural network for predictions)
 
 
 ## Autoencoder Development
@@ -176,7 +176,9 @@ Sigmoid(with x 255) gives loss: 2036.6487
 ![V7](/Leveraging%20autoencoders/Images/autoencoderV7.png)
 
 
-## Attacking a NN to the end of the autoencoder
+## Adding Neural network for predictions
+
+Using the encoder part of the encoder with frozen parameters, with a neural network added on the end to generate predictions
 
 #### V1
 I initally thought it was working very well, but had accidentally typed (train_acc) instead of (test_acc) so it was repeating the same result twice.
@@ -262,3 +264,52 @@ out_features = 10))
 Order of Linear, normalization, activation and dropout layers seems to be greatly debating online. Will need to do some furhter research into it
 
 To try: L1, L2 regularization
+
+#### V3
+
+Model working correctly.
+Reduced the NN to only a have a single layer of 50 nodes.
+Giving the following loss and accuracy 
+
+E:9, b:15 |Train loss: 0.3213, acc:90.1367 | Test loss: 0.3504, acc: 89.0137 | lr: 0.0125
+
+Full NN design:
+```
+SuffixNN(
+  (encoder): Sequential(
+    (0): BatchNorm1d(784, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (1): Linear(in_features=784, out_features=128, bias=True)
+    (2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (3): Linear(in_features=128, out_features=64, bias=True)
+    (4): ReLU()
+    (5): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (6): Linear(in_features=64, out_features=32, bias=True)
+    (7): ReLU()
+    (8): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (9): Linear(in_features=32, out_features=16, bias=True)
+    (10): ReLU()
+    (11): BatchNorm1d(16, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (12): Linear(in_features=16, out_features=10, bias=True)
+    (13): ReLU()
+    (14): BatchNorm1d(10, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+  )
+  (layers): Sequential(
+    (0): BatchNorm1d(10, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (1): Linear(in_features=10, out_features=50, bias=True)
+    (2): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (3): ReLU()
+    (4): Dropout(p=0.2, inplace=False)
+    (5): Linear(in_features=50, out_features=10, bias=True)
+  )
+)
+```
+Normal predictions
+![1](/Leveraging%20autoencoders/Images/predictions.png)
+
+Predictions with reconstructions from autoencoder
+![2](/Leveraging%20autoencoders/Images/predictionsWithReconstructions.png)
+
+Wrong predictions from the model, with their reconstructions
+![3](/Leveraging%20autoencoders/Images/wrongExamples.png)
+
+From this we can see the majority of the errors are caused through the error of the autoencoder, rather than the suffix neural network after it. I can attempt to optimize this by using a convolutional artitecture.
