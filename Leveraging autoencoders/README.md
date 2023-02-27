@@ -221,4 +221,44 @@ add Code
 
 My model is performing well on training data but badly on unseen data
 
-Trying Dropout, L1, L2 regularization
+- Trying Dropout
+
+After 1 epoch this was the result:
+E:0, b:15 |Train loss: 0.5141, acc:84.0332 | Test loss: 0.5743, acc: 9.0332 | lr: 0.1
+The train and test losses are similar (both having signficantly decreased since their first values of 1.9),
+but test accuracy didn't decrease.
+This led me to find the error:
+
+```
+test_pred_labels = torch.argmax(y_t_logits, dim=1)
+``` 
+should instead have 
+```y_test_logits``` 
+inside
+
+Explaining why the test accuracy was no better than random
+
+Also changed model architecutre to:
+```
+l1 = 50
+l2 = 50      
+
+self.layers = nn.Sequential(
+nn.BatchNorm1d(num_features = 10, affine = False),
+nn.Linear(in_features=10,
+out_features=l1),
+nn.BatchNorm1d(num_features = l1, affine = False),
+nn.ReLU(),
+nn.Dropout(p=0.2),
+nn.Linear(in_features = l1,
+out_features = l1),
+nn.BatchNorm1d(num_features = l2, affine = False),
+nn.ReLU(),
+nn.Dropout(p=0.2),
+nn.Linear(in_features = l2,
+out_features = 10))
+```
+
+Order of Linear, normalization, activation and dropout layers seems to be greatly debating online. Will need to do some furhter research into it
+
+To try: L1, L2 regularization
