@@ -11,5 +11,7 @@
 
 - [Leveraging autoencoders to utilize unlabelled data](/Leveraging%20autoencoders)
 
+![2](/Leveraging%20autoencoders/Images/predictionsWithReconstructions.png)
+
 - [PyTorch Tutorials](/Tutorials/)
 
