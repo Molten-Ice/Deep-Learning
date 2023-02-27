@@ -220,3 +220,5 @@ add Code
 #### V2
 
 My model is performing well on training data but badly on unseen data
+
+Trying Dropout, L1, L2 regularization
