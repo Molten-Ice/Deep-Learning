@@ -6,6 +6,8 @@
 
 Leveraging autoencoders to utilize unlabelled data:
 
+![modelDiagram](/Leveraging%20autoencoders/Images/modelDiagram.png)
+
 ![2](/Leveraging%20autoencoders/Images/predictionsWithReconstructions.png)
 
 
