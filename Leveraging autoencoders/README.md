@@ -5,6 +5,79 @@
 [Adding Neural network for predictions](https://github.com/Molten-Ice/Kaggle/tree/main/Leveraging%20autoencoders#adding-neural-network-for-predictions)
 
 
+## Architectures
+
+![modelDiagram](/Leveraging%20autoencoders/Images/modelDiagram.png)
+
+
+### Prediction model:
+
+SuffixNN(
+  (encoder): Sequential(
+    (0): BatchNorm1d(784, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (1): Linear(in_features=784, out_features=128, bias=True)
+    (2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (3): Linear(in_features=128, out_features=64, bias=True)
+    (4): ReLU()
+    (5): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (6): Linear(in_features=64, out_features=32, bias=True)
+    (7): ReLU()
+    (8): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (9): Linear(in_features=32, out_features=16, bias=True)
+    (10): ReLU()
+    (11): BatchNorm1d(16, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (12): Linear(in_features=16, out_features=10, bias=True)
+    (13): ReLU()
+    (14): BatchNorm1d(10, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+  )
+  (layers): Sequential(
+    (0): BatchNorm1d(10, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (1): Linear(in_features=10, out_features=50, bias=True)
+    (2): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (3): ReLU()
+    (4): Dropout(p=0.2, inplace=False)
+    (5): Linear(in_features=50, out_features=10, bias=True)
+  )
+
+### Autoencoder
+
+AudoencoderV3(
+  (encoder): Sequential(
+    (0): BatchNorm1d(784, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (1): Linear(in_features=784, out_features=128, bias=True)
+    (2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (3): Linear(in_features=128, out_features=64, bias=True)
+    (4): ReLU()
+    (5): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (6): Linear(in_features=64, out_features=32, bias=True)
+    (7): ReLU()
+    (8): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (9): Linear(in_features=32, out_features=16, bias=True)
+    (10): ReLU()
+    (11): BatchNorm1d(16, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (12): Linear(in_features=16, out_features=10, bias=True)
+    (13): ReLU()
+    (14): BatchNorm1d(10, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+  )
+  (decoder): Sequential(
+    (0): Linear(in_features=10, out_features=16, bias=True)
+    (1): ReLU()
+    (2): BatchNorm1d(16, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (3): Linear(in_features=16, out_features=32, bias=True)
+    (4): ReLU()
+    (5): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (6): Linear(in_features=32, out_features=64, bias=True)
+    (7): ReLU()
+    (8): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (9): Linear(in_features=64, out_features=128, bias=True)
+    (10): ReLU()
+    (11): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (12): Linear(in_features=128, out_features=784, bias=True)
+    (13): ReLU()
+  )
+)
+
+
 ## Autoencoder Development
 Started 25/02/2023
 Want to replicate MNIST with a high accuracy using a bottleneck of 10 nodes
@@ -318,3 +391,32 @@ From this we can see the majority of the errors are caused through the error of 
 #### V4
 
 Reducing training data
+
+Results from testing it out on smaller training datasets.
+
+1000 total elements (Training on 7 batches of size 128)
+E:9, b:6 |Train loss: 0.3471, acc:89.0625 | Test loss: 0.4639, acc: 89.8438 | lr: 0.05
+
+500 total elements (Training on 7 batches of size 64)
+E:9, b:6 |Train loss: 0.3537, acc:89.0625 | Test loss: 0.6855, acc: 73.4375 | lr: 0.05
+Loss graph is very choppy, different between train and test loss/accuracy becomes larger over time (=> overfitting)
+
+E:19, b:3 |Train loss: 0.2972, acc:90.6250 | Test loss: 0.6904, acc: 79.6875 | lr: 0.05
+Model is definitely overfitting (caused by the smaller amount of available data)
+
+Graphs of the loss for 1000 & 512 elements respectively
+
+Using a much smaller batch size
+![LossGraph1](/Leveraging%20autoencoders/Images/LossGraph1.png)
+
+Larger batch size and smaller overall dataset (512), leading to extreme overfitting
+![LossGraph2](/Leveraging%20autoencoders/Images/LossGraph2.png)
+
+
+MAJOR ISSUE: the name I use for one of the functions is "X_test" which is what I import the data from,
+so the dataload is breaking/ CustomDataset is breaking.
+Fixed now, so even though train only has 500 elements to use to learn, test has 8400 to validate the results
+
+#### Conclusion
+
+Here, to make this a scientific experience I should really test out a neural network within an autoencoder on a small dataset and see how high I can get the accuracy. However, right now I don't think it is the most effective use of my time. So I'm going to instead create some CNNs, and come back to the problem of using an autoencoder to leverage unlabelled data when I have a dataset I really want to use it on
