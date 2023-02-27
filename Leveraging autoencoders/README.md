@@ -174,3 +174,14 @@ ReLU(with clamp) gives loss: 1154.6481
 Sigmoid(with x 255) gives loss: 2036.6487
 
 ![V7](/Leveraging%20autoencoders/Images/autoencoderV7.png)
+
+
+## Attacking a NN to the end of the autoencoder
+
+I initally thought it was working very well, but had accidentally typed (train_acc) instead of (test_acc) so it was repeating the same result twice.
+Very good train accuracy and loss, but not transferring over to the test dataset.
+Currently using 1000 elements with a batch size of 32
+
+E:5, b:0 |Train loss: 0.2339, acc:96.0938 | Test loss: 0.5528, acc: 11.7188 | lr: 0.1
+
+Realized my error when I checked the values and the predictions were awful
