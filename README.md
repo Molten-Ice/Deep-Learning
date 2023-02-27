@@ -9,7 +9,7 @@ Leveraging autoencoders to utilize unlabelled data:
 ![2](/Leveraging%20autoencoders/Images/predictionsWithReconstructions.png)
 
 
-## [CNN forfashion mnist]([/Leveraging%20autoencoders)](https://github.com/Molten-Ice/Kaggle/blob/main/cnn-for-fashion-mnist.ipynb)
+## [CNN forfashion mnist](https://github.com/Molten-Ice/Kaggle/blob/main/cnn-for-fashion-mnist.ipynb)
 
 Uses Conv2d, MaxPool2d in a Tiny VGG style architecture.
 
