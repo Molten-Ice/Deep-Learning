@@ -1,8 +1,8 @@
 # Leveraging an autoencoder to utilize unlabelled data
 
-[Autoencoder Development](## Autoencoder Development)
+[Autoencoder Development](https://github.com/Molten-Ice/Kaggle/tree/main/Leveraging%20autoencoders#autoencoder-development)
 
-[Adding Neural network for predictions](## Adding Neural network for predictions)
+[Adding Neural network for predictions](https://github.com/Molten-Ice/Kaggle/tree/main/Leveraging%20autoencoders#adding-neural-network-for-predictions)
 
 
 ## Autoencoder Development
@@ -303,6 +303,7 @@ SuffixNN(
   )
 )
 ```
+
 Normal predictions
 ![1](/Leveraging%20autoencoders/Images/predictions.png)
 
@@ -313,3 +314,7 @@ Wrong predictions from the model, with their reconstructions
 ![3](/Leveraging%20autoencoders/Images/wrongExamples.png)
 
 From this we can see the majority of the errors are caused through the error of the autoencoder, rather than the suffix neural network after it. I can attempt to optimize this by using a convolutional artitecture.
+
+#### V4
+
+Reducing training data
