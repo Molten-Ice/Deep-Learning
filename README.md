@@ -25,3 +25,5 @@ This is as the classes are very similar and so hard to distinguish (beyond human
 - Explore Kaggle competitions
 
 - Use transfer learning
+
+- Upsample autoencoder, and format code nicely
