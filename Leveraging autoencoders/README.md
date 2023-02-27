@@ -178,6 +178,7 @@ Sigmoid(with x 255) gives loss: 2036.6487
 
 ## Attacking a NN to the end of the autoencoder
 
+#### V1
 I initally thought it was working very well, but had accidentally typed (train_acc) instead of (test_acc) so it was repeating the same result twice.
 Very good train accuracy and loss, but not transferring over to the test dataset.
 Currently using 1000 elements with a batch size of 32
@@ -185,3 +186,37 @@ Currently using 1000 elements with a batch size of 32
 E:5, b:0 |Train loss: 0.2339, acc:96.0938 | Test loss: 0.5528, acc: 11.7188 | lr: 0.1
 
 Realized my error when I checked the values and the predictions were awful
+
+```
+SuffixNN(
+  (encoder): Sequential(
+    (0): BatchNorm1d(784, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (1): Linear(in_features=784, out_features=128, bias=True)
+    (2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (3): Linear(in_features=128, out_features=64, bias=True)
+    (4): ReLU()
+    (5): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (6): Linear(in_features=64, out_features=32, bias=True)
+    (7): ReLU()
+    (8): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (9): Linear(in_features=32, out_features=16, bias=True)
+    (10): ReLU()
+    (11): BatchNorm1d(16, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (12): Linear(in_features=16, out_features=10, bias=True)
+    (13): ReLU()
+    (14): BatchNorm1d(10, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+  )
+  (layers): Sequential(
+    (0): BatchNorm1d(10, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (1): Linear(in_features=10, out_features=50, bias=True)
+    (2): ReLU()
+    (3): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
+    (4): Linear(in_features=50, out_features=10, bias=True)
+  )
+)
+add Code
+```
+
+#### V2
+
+My model is performing well on training data but badly on unseen data
