@@ -12,6 +12,7 @@
 
 ### Prediction model:
 
+```
 SuffixNN(
   (encoder): Sequential(
     (0): BatchNorm1d(784, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
@@ -38,9 +39,11 @@ SuffixNN(
     (4): Dropout(p=0.2, inplace=False)
     (5): Linear(in_features=50, out_features=10, bias=True)
   )
+  ```
 
 ### Autoencoder
 
+```
 AudoencoderV3(
   (encoder): Sequential(
     (0): BatchNorm1d(784, eps=1e-05, momentum=0.1, affine=False, track_running_stats=True)
@@ -76,7 +79,7 @@ AudoencoderV3(
     (13): ReLU()
   )
 )
-
+```
 
 ## Autoencoder Development
 Started 25/02/2023
@@ -407,9 +410,11 @@ Model is definitely overfitting (caused by the smaller amount of available data)
 Graphs of the loss for 1000 & 512 elements respectively
 
 Using a much smaller batch size
+
 ![LossGraph1](/Leveraging%20autoencoders/Images/LossGraph1.png)
 
 Larger batch size and smaller overall dataset (512), leading to extreme overfitting
+
 ![LossGraph2](/Leveraging%20autoencoders/Images/LossGraph2.png)
 
 
