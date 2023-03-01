@@ -7,7 +7,7 @@ This dataset contained a collection of MRI images for the detection of Brain Tum
 [Kaggle dataset](https://www.kaggle.com/datasets/navoneel/brain-mri-images-for-brain-tumor-detection?datasetId=165566)
 
 
-[10Images](/Images/10MRIs.png)
+![10Images](/Images/10MRIs.png)
 
 ## Development
 
@@ -20,7 +20,8 @@ raw data -> torch.utils.data.Dataset -> torch.utils.data.DataLoader
 
 The dataset has 98 "no" images and 155 "yes" images.
 Which look like the following
-[Scan](/Images/MRI1.png)
+
+![Scan](/Images/MRI1.png)
 
 The data was all over the place, different numbers of channels (1-4), different sizes, etc.
 
@@ -78,9 +79,9 @@ Using 23,000,000 frozen parameters & 2,000 learnable ones!!
 
 Running attempt 1, Adam with 0.1 lr for 10 epochs.
 
-[Image1](/Images/LossGraph)
+![Image1](/Images/LossGraph)
 
-[Image2](/Images/AccuracyGraph)
+![Image2](/Images/AccuracyGraph)
 
 woahhh!
 
@@ -89,6 +90,35 @@ Something is not going right here, it seems to be almost "random"
 One thing that instantly draws my eye is that for the first 3 plot points (15ish batches, i.e. 1 epoch) the accuracy rapidly climbs.
 
 My thoughts: decrease the learning rate and train over 1/2 epochs to see what happens
+
+New graphs produced with 0.001 lr:
+
+
+![Image3](/Images/LossGraph2)
+
+![Image4](/Images/AccuracyGraph2)
+
+Looking at the metrics below the  accuracy tends towards 100%, but the loss function decreases very little, and the test loss even increases!
+
+We are only training on 135 images, and testing on 40, so it is hard to gain any statistical significance. However it is clear something strange is going on
+
+
+Epoch: 0, batch 0, taken 1.3065 seconds | Train loss: 0.0906, acc: 0.2348 | Test loss: 0.1025, acc: 0.4412 | Learning rate: 0.001000
+Epoch: 0, batch 1, taken 1.3190 seconds | Train loss: 0.0897, acc: 0.3712 | Test loss: 0.1035, acc: 0.5882 | Learning rate: 0.001000
+Epoch: 0, batch 2, taken 1.4828 seconds | Train loss: 0.0891, acc: 0.6515 | Test loss: 0.1048, acc: 0.8824 | Learning rate: 0.001000
+Epoch: 0, batch 3, taken 1.2889 seconds | Train loss: 0.0889, acc: 0.6515 | Test loss: 0.1044, acc: 0.8824 | Learning rate: 0.001000
+Epoch: 0, batch 4, taken 1.2867 seconds | Train loss: 0.0884, acc: 0.6894 | Test loss: 0.1046, acc: 0.8235 | Learning rate: 0.001000
+Epoch: 0, batch 5, taken 1.2831 seconds | Train loss: 0.0884, acc: 0.6515 | Test loss: 0.1049, acc: 0.7941 | Learning rate: 0.001000
+Epoch: 0, batch 6, taken 1.3495 seconds | Train loss: 0.0878, acc: 0.6818 | Test loss: 0.1050, acc: 0.7941 | Learning rate: 0.001000
+Epoch: 0, batch 7, taken 1.2914 seconds | Train loss: 0.0876, acc: 0.6667 | Test loss: 0.1050, acc: 0.8235 | Learning rate: 0.001000
+Epoch: 0, batch 8, taken 1.2857 seconds | Train loss: 0.0869, acc: 0.7273 | Test loss: 0.1052, acc: 0.8235 | Learning rate: 0.001000
+Epoch: 0, batch 9, taken 1.3476 seconds | Train loss: 0.0866, acc: 0.8333 | Test loss: 0.1059, acc: 0.9118 | Learning rate: 0.001000
+Epoch: 0, batch 10, taken 1.8436 seconds | Train loss: 0.0861, acc: 0.8939 | Test loss: 0.1069, acc: 0.9118 | Learning rate: 0.001000
+Epoch: 0, batch 11, taken 1.2856 seconds | Train loss: 0.0856, acc: 0.9091 | Test loss: 0.1071, acc: 0.9412 | Learning rate: 0.001000
+Epoch: 0, batch 12, taken 1.3048 seconds | Train loss: 0.0852, acc: 0.9545 | Test loss: 0.1084, acc: 0.9412 | Learning rate: 0.001000
+Epoch: 0, batch 13, taken 1.2899 seconds | Train loss: 0.0843, acc: 0.9621 | Test loss: 0.1097, acc: 0.9706 | Learning rate: 0.001000
+Epoch: 0, batch 14, taken 1.3158 seconds | Train loss: 0.0843, acc: 0.9848 | Test loss: 0.1120, acc: 1.0000 | Learning rate: 0.001000
+Epoch: 0, batch 15, taken 1.2955 seconds | Train loss: 0.0838, acc: 1.0000 | Test loss: 0.1141, acc: 1.0000 | Learning rate: 0.001000
 
 
 ### Full Model:
