@@ -1,6 +1,18 @@
-# Creating a CNN for classification in FashionMNIST
+# Creating a CNN( Tiny VGG inspired) for classification in FashionMNIST
 
 ## Development
+
+The model is inspired by Tiny VGG inspired in the sense, we will repeat the following. 
+
+In each block we'll have 2 convolutional layers which preserve size, followed by a max pool layer which half width and length. We'll repeat this process 3 times going from
+
+28x28 -> 14x14 -> 7x7 -> 3x3
+
+before flattening the model and feating into into a linear layer, followed by a classification layer.
+
+As this is a classification problem over multiple classes I thought the cross entropy loss function most suitable.
+
+Side note: The ReLU activation function will be interspersed between almost every layer. Coming from a mathematians background I assumed (wrongly) that sigmoid would be supreme. But so far it seems to perform worse in almost any case. For this reason I'm going to be sticking to ReLU(or leaky ReLU or even GeLU :O) , unless the situation demands I use sigmoid.
 
 ### V1
 
