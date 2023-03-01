@@ -6,8 +6,7 @@ This dataset contained a collection of MRI images for the detection of Brain Tum
 
 [Kaggle dataset](https://www.kaggle.com/datasets/navoneel/brain-mri-images-for-brain-tumor-detection?datasetId=165566)
 
-
-![10Images](/Images/10MRIs.png)
+![10Images](/Brain%20MRIs(modified%20resnet50)/Images/10MRIs.png)
 
 ## Development
 
