@@ -88,7 +88,7 @@ Notes: The method for calculating the loss here was inside the inner batch loop.
 
 ## Results Analysis
 
-![/Images/TinyVGGConfusionMatrix]
+![/FashionMNIST%20Tiny%20VGG%20inspired%20architecture/Images/TinyVGGConfusionMatrix]
 
 From the above confusion matrix we can see the majority of the error term is coming from the model incorrectly predicting coats, dresses, pullovers and T-shirts as shirts.
 
