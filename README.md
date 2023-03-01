@@ -19,7 +19,7 @@ Based on the below confusion matrix we can see the majority of the errors come p
 This is as the classes are very similar and so hard to distinguish (beyond human standard)
 
 
-![TinyVGGConfusionMatrix](/Images/TinyVGGConfusionMatrix.png) ![FashionMNIST](/Images/FashionMNIST.png)
+![TinyVGGConfusionMatrix](/FashionMNIST%20Tiny%20VGG%20inspired%20architecture/TinyVGGConfusionMatrix.png) ![FashionMNIST](/FashionMNIST%20Tiny%20VGG%20inspired%20architecture/FashionMNIST.png)
 
 
 # To Do:
