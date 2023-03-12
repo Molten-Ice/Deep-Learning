@@ -2,6 +2,14 @@
 
 # Projects:
 
+## [GPT]
+
+### To do
+
+- Parallelize the attention heads and compare the difference in running time
+- Expand from 2 blocks to 6 blocks, and compare the loss and accuracy
+- Create a ViT from scratch (essentially run Conv2d at the start, main structure remains untouched)
+
 ## [Leveraging autoencoders](/Leveraging%20autoencoders)
 
 Leveraging autoencoders to utilize unlabelled data:
