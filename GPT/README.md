@@ -1,39 +1,60 @@
 
 ## Development log
 
-Below I dicuss different results of the model, through
+Below I dicuss different results of the model, for different archiecture variations and learning iterations
 
 ## Model results
 
 Bigram model, after 0 & 5000 iterations: (7056 parameters):
+
 train data -> loss:4.9861, top@1: 1.0540%, top@5: 4.6292% | test data -> loss:4.9855, top@1: 1.0583%, top@5: 4.6293%
+
 train data -> loss:3.2754, top@1: 17.7066%, top@5: 48.9886% | test data -> loss:3.2744, top@1: 17.7488%, top@5: 48.9851%
 
 Transformer model
+
 For 1 block, 1 attention head of size 384, after 0, 1100 iterations: (1.93m parameters)
+
 train data -> loss:4.5776, top@1: 1.2049%, top@5: 6.3984% | test data -> loss:4.5780, top@1: 1.2048%, top@5: 6.3793%
+
 train data -> loss:1.7620, top@1: 46.8763%, top@5: 81.0912% | test data -> loss:1.7654, top@1: 46.7969%, top@5: 81.0229%
 
+
 For 1 block, 6 attention heads of size 64, after 0, 1100 & 2200 & 5000 iterations: (1.93m parameters)
+
 train data -> loss:4.6111, top@1: 0.9018%, top@5: 5.0043% | test data -> loss:4.6111, top@1: 0.9040%, top@5: 5.0030%
+
 train data -> loss:1.7689, top@1: 46.9523%, top@5: 80.9174% | test data -> loss:1.7663, top@1: 46.9904%, top@5: 80.9795%
+
 train data -> loss:1.5743, top@1: 52.2909%, top@5: 84.1496% | test data -> loss:1.5725, top@1: 52.3335%, top@5: 84.1816%
+
 train data -> loss:1.4126, top@1: 56.7107%, top@5: 86.2612% | test data -> loss:1.4141, top@1: 56.7039%, top@5: 86.2346%
 
+
 For 2 blocks, 6 attention heads of size 64, after 0, 1100 & 2200 & 5000 iterations: (3.71m parameters)
+
 train data -> loss:4.5676, top@1: 1.3751%, top@5: 6.5670% | test data -> loss:4.5679, top@1: 1.3753%, top@5: 6.5213%
+
 train data -> loss:1.6263, top@1: 51.1514%, top@5: 83.3884% | test data -> loss:1.6277, top@1: 51.0817%, top@5: 83.3397%
+
 train data -> loss:1.3611, top@1: 58.3089%, top@5: 87.1573% | test data -> loss:1.3613, top@1: 58.3264%, top@5: 87.1799%
+
 train data -> loss:1.1515, top@1: 63.9750%, top@5: 89.8278% | test data -> loss:1.1514, top@1: 63.9651%, top@5: 89.8546%
 
 ## ERRORS
 
 ERROR: Had print(f'iter{i} | {evaluate(bigram_model)}'), NOT GPT model!!!!
+
 ERROR: Was using softmax to create logits before cross_entropy loss, which really needed the raw last layer output (as it has softmax inbuilt)
+
 ERROR: had eval_interval and eval_iterations confused so was only using 10 iterations for testing
-ERROR: Loss is not decreasing as much as it should be (turned out to be the BIGGEST issue ever, see all details below)
+
+ERROR: Loss is not decreasing as much as it should be (turned out to be the BIGGEST issue ever, see all details below):
+
 iter0, t_train:0.00s, t_eval:6.67s | train data -> loss:4.6006, top@1: 0.8144%, top@5: 5.4142% | test data -> loss:4.6006, top@1: 0.8204%, top@5: 5.4463%
+
 iter20, t_train:0.92s, t_eval:7.06s | train data -> loss:3.4655, top@1: 24.2277%, top@5: 61.2470% | test data -> loss:3.4663, top@1: 24.1698%, top@5: 61.1395%
+
 iter190, t_train:0.87s, t_eval:6.61s | train data -> loss:4.1917, top@1: 28.4617%, top@5: 66.7410% | test data -> loss:4.1883, top@1: 28.4191%, top@5: 66.7065%
 
 Train and test accuarcy improved but loss went up significantly. Makes me wonder if something is wrong with eval
@@ -51,6 +72,11 @@ It is only creating the batches (xb, yb) inside the function thats causing the l
 I suspect its to do with dropout not be factored in as it should.
 After messing around with combinations of model.eval(), torch.inference_mode(), @torch.no_grad() I could not find a working combination
 
+# FIXED!!!
+# Many many issues with evaluation, incorrect results etc. 
+# All fixed when putting the initial data (which goes into get_batches) into a torch.Tensor.
+# i.e. data = torch.tensor(encoded_text, dtype=torch.long) ;)
+
 ERROR: Generations issue
 forward, x -> torch.Size([1, 2])
 te: torch.Size([1, 2, 384]) | pe: torch.Size([256, 384])
@@ -59,9 +85,14 @@ Now: pe = self.positional_encoding(torch.arange(T, device = device))
 
 
 ## Model architecture
+
 ======================================================================
-Layer (type:depth-idx)                        Param #
+
+Layer (type:depth-idx)  
+                      Param #
+
 ======================================================================
+
 GPT                                           --
 ├─Embedding: 1-1                              32,256
 ├─Embedding: 1-2                              98,304
@@ -80,9 +111,11 @@ GPT                                           --
 ├─Linear: 1-5                                 32,340
 
 ======================================================================
+
 Total params: 3,712,596
 Trainable params: 3,712,596
 Non-trainable params: 0
+
 ======================================================================
 
 ## Generation during training
