@@ -5,7 +5,18 @@ Below I dicuss different results of the model, for different archiecture variati
 
 ## Model results
 
-
+MultiHeadAttention layers implemented in parallel, making the model (abit) quicker
+# n_heads:6 | n_embedding: 384 | n_layer: 1 num_params: 1.9381 Million Parameters
+# ---------TRAIN----------|-----------TEST-----------|--TIMING----------
+# loss     top@1    top@5 |  loss     top@1    top@5 |  eval_time
+4.6333   0.9825   5.1626   4.6361   0.9424   5.0534   10.8289### iter: 0 | loss: 4.6345 | train time interval: 0.01 seconds
+2.5013   27.6460  66.2090  2.5089   27.8167  66.1908  10.9146### iter: 100 | loss: 2.5085 | train time interval: 7.76 seconds
+# ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+# n_heads:6 | n_embedding: 384 | n_layer: 1 num_params: 1.9381 Million Parameters
+# ---------TRAIN----------|-----------TEST-----------|--TIMING----------
+# loss     top@1    top@5 |  loss     top@1    top@5 |  eval_time
+4.6681   0.7924   4.6143   4.6686   0.7852   4.5937   10.1680### iter: 0 | loss: 4.6672 | train time interval: 0.01 seconds
+2.5054   27.4399  65.9486  2.5082   27.7022  66.0398  10.2297### iter: 100 | loss: 2.5171 | train time interval: 6.53 seconds
 
 
 ERROR: loss going down from training batches, but loss not going down in evaluation function
