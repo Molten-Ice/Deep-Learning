@@ -5,6 +5,54 @@ Below I dicuss different results of the model, for different archiecture variati
 
 ## Model results
 
+
+
+
+ERROR: loss going down from training batches, but loss not going down in evaluation function
+FIX: change the last logits to use torch to flatten & reshape them, not einops!
+
+Model results
+
+n_heads:1 | n_embedding: 384 | n_layer: 1 num_params: 1.9381 Million Parameters
+---------TRAIN----------|-----------TEST-----------|--TIMING----------
+loss     top@1    top@5 |  loss     top@1    top@5 |  eval_time
+4.6251   1.0010   5.3253   4.6259   0.9803   5.2768   9.1335### iter: 0 | loss: 4.6184 | time passed: 0.01 seconds
+2.1121   37.7688  74.1317  2.1235   37.8548  74.0076  9.3398### iter: 500 | loss: 2.1815 | time passed: 30.53 seconds
+1.9186   42.8550  78.2607  1.9342   42.7653  78.0210  9.6899### iter: 1000 | loss: 2.0405 | time passed: 31.60 seconds
+1.8288   45.3350  79.9083  1.8512   45.1459  79.5408  9.6345### iter: 1500 | loss: 1.9643 | time passed: 32.50 seconds
+1.7687   46.7528  81.0078  1.7921   46.5166  80.6176  9.7050### iter: 2000 | loss: 1.8895 | time passed: 32.11 seconds
+1.7215   48.0033  82.0023  1.7482   47.6450  81.6210  9.7202### iter: 2500 | loss: 1.8397 | time passed: 32.22 seconds
+1.6770   49.1031  82.7702  1.7055   48.6899  82.4387  9.6592### iter: 3000 | loss: 1.8228 | time passed: 32.20 seconds
+1.6453   49.9597  83.3622  1.6714   49.8161  82.9845  9.6691### iter: 3500 | loss: 1.8092 | time passed: 32.18 seconds
+1.6255   50.5298  83.7537  1.6534   50.3321  83.2849  9.6645### iter: 4000 | loss: 1.7633 | time passed: 32.27 seconds
+1.5995   51.1975  84.1245  1.6270   50.9386  83.6540  9.7617### iter: 4500 | loss: 1.7637 | time passed: 32.27 seconds
+1.5860   51.6093  84.3125  1.6166   51.3648  83.7469  9.6577### iter: 5000 | loss: 1.7367 | time passed: 32.26 seconds
+Time taken for 5001 iterations: 425.84 seconds
+
+n_heads:6 | n_embedding: 384 | n_layer: 1 num_params: 1.9381 Million Parameters
+---------TRAIN----------|-----------TEST-----------|--TIMING----------
+loss     top@1    top@5 |  loss     top@1    top@5 |  eval_time
+4.5863   1.0479   5.8981   4.5842   1.0581   5.9148   12.1106### iter: 0 | loss: 4.5878 | time passed: 0.01 seconds
+1.8411   45.1929  79.9176  1.8622   44.8720  79.6802  12.4323### iter: 1000 | loss: 1.9226 | time passed: 82.85 seconds
+1.5696   52.5954  84.5574  1.5961   52.3585  84.0290  12.4095### iter: 2000 | loss: 1.6470 | time passed: 84.49 seconds
+1.4579   55.7318  86.0746  1.4972   55.1578  85.5186  12.3779### iter: 3000 | loss: 1.5486 | time passed: 84.46 seconds
+1.4020   57.2436  86.8427  1.4499   56.4642  86.1396  12.4372### iter: 4000 | loss: 1.4962 | time passed: 84.34 seconds
+1.3683   58.2265  87.2860  1.4211   57.3663  86.4546  12.5109### iter: 5000 | loss: 1.4708 | time passed: 84.52 seconds
+Time taken for 5001 iterations: 495.01 seconds
+
+n_heads:6 | n_embedding: 384 | n_layer: 2 num_params: 3.7126 Million Parameters
+---------TRAIN----------|-----------TEST-----------|--TIMING----------
+loss     top@1    top@5 |  loss     top@1    top@5 |  eval_time
+4.6421   1.2690   5.8771   4.6435   1.2716   5.8757   22.4767### iter: 0 | loss: 4.6435 | time passed: 0.02 seconds
+1.7368   47.8957  81.7436  1.7611   47.5777  81.3444  23.5179### iter: 1000 | loss: 1.8046 | time passed: 163.96 seconds
+1.4208   56.8438  86.4636  1.4556   56.2996  85.9969  23.5306### iter: 2000 | loss: 1.5346 | time passed: 164.35 seconds
+1.3047   60.0133  87.9479  1.3588   59.1245  87.2243  23.5234### iter: 3000 | loss: 1.3822 | time passed: 165.04 seconds
+1.2443   61.5979  88.7171  1.3192   60.3178  87.7060  23.5472### iter: 4000 | loss: 1.3107 | time passed: 164.57 seconds
+1.2039   62.7550  89.1896  1.2930   61.1180  88.0476  23.5362### iter: 5000 | loss: 1.2846 | time passed: 164.56 seconds
+Time taken for 5001 iterations: 962.74 seconds
+
+----------------------
+
 Bigram model, after 0 & 5000 iterations: (7056 parameters):
 
 train data -> loss:4.9861, top@1: 1.0540%, top@5: 4.6292% | test data -> loss:4.9855, top@1: 1.0583%, top@5: 4.6293%
