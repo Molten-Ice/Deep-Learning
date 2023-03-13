@@ -32,19 +32,29 @@ train data -> loss:1.4126, top@1: 56.7107%, top@5: 86.2612% | test data -> loss:
 
 
 For 2 blocks, 6 attention heads of size 64, after 0, 1100 & 2200 & 5000 iterations: (3.71m parameters)
+
 train data -> loss:4.5676, top@1: 1.3751%, top@5: 6.5670% | test data -> loss:4.5679, top@1: 1.3753%, top@5: 6.5213%
+
 train data -> loss:1.6263, top@1: 51.1514%, top@5: 83.3884% | test data -> loss:1.6277, top@1: 51.0817%, top@5: 83.3397%
+
 train data -> loss:1.3611, top@1: 58.3089%, top@5: 87.1573% | test data -> loss:1.3613, top@1: 58.3264%, top@5: 87.1799%
+
 train data -> loss:1.1515, top@1: 63.9750%, top@5: 89.8278% | test data -> loss:1.1514, top@1: 63.9651%, top@5: 89.8546%
 
 ## ERRORS
 
 ERROR: Had print(f'iter{i} | {evaluate(bigram_model)}'), NOT GPT model!!!!
+
 ERROR: Was using softmax to create logits before cross_entropy loss, which really needed the raw last layer output (as it has softmax inbuilt)
+
 ERROR: had eval_interval and eval_iterations confused so was only using 10 iterations for testing
-ERROR: Loss is not decreasing as much as it should be (turned out to be the BIGGEST issue ever, see all details below)
+
+ERROR: Loss is not decreasing as much as it should be (turned out to be the BIGGEST issue ever, see all details below):
+
 iter0, t_train:0.00s, t_eval:6.67s | train data -> loss:4.6006, top@1: 0.8144%, top@5: 5.4142% | test data -> loss:4.6006, top@1: 0.8204%, top@5: 5.4463%
+
 iter20, t_train:0.92s, t_eval:7.06s | train data -> loss:3.4655, top@1: 24.2277%, top@5: 61.2470% | test data -> loss:3.4663, top@1: 24.1698%, top@5: 61.1395%
+
 iter190, t_train:0.87s, t_eval:6.61s | train data -> loss:4.1917, top@1: 28.4617%, top@5: 66.7410% | test data -> loss:4.1883, top@1: 28.4191%, top@5: 66.7065%
 
 Train and test accuarcy improved but loss went up significantly. Makes me wonder if something is wrong with eval
@@ -70,9 +80,14 @@ Now: pe = self.positional_encoding(torch.arange(T, device = device))
 
 
 ## Model architecture
+
 ======================================================================
-Layer (type:depth-idx)                        Param #
+
+Layer (type:depth-idx)  
+                      Param #
+
 ======================================================================
+
 GPT                                           --
 ├─Embedding: 1-1                              32,256
 ├─Embedding: 1-2                              98,304
@@ -91,9 +106,11 @@ GPT                                           --
 ├─Linear: 1-5                                 32,340
 
 ======================================================================
+
 Total params: 3,712,596
 Trainable params: 3,712,596
 Non-trainable params: 0
+
 ======================================================================
 
 ## Generation during training
