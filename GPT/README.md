@@ -1,6 +1,8 @@
 
 ## Development log
 
+Below I dicuss different results of the model, through
+
 ## Model results
 
 Bigram model, after 0 & 5000 iterations: (7056 parameters):
