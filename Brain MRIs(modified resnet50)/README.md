@@ -6,8 +6,7 @@ This dataset contained a collection of MRI images for the detection of Brain Tum
 
 [Kaggle dataset](https://www.kaggle.com/datasets/navoneel/brain-mri-images-for-brain-tumor-detection?datasetId=165566)
 
-
-![10Images](/Images/10MRIs.png)
+![10Images](/Brain%20MRIs(modified%20resnet50)/Images/10MRIs.png)
 
 ## Development
 
@@ -21,7 +20,7 @@ raw data -> torch.utils.data.Dataset -> torch.utils.data.DataLoader
 The dataset has 98 "no" images and 155 "yes" images.
 Which look like the following
 
-![Scan](/Images/MRI1.png)
+![Scan](/Brain%20MRIs(modified%20resnet50)/Images/MRI1.png)
 
 The data was all over the place, different numbers of channels (1-4), different sizes, etc.
 
@@ -79,9 +78,9 @@ Using 23,000,000 frozen parameters & 2,000 learnable ones!!
 
 Running attempt 1, Adam with 0.1 lr for 10 epochs.
 
-![Image1](/Images/LossGraph)
+![Image1](/Brain%20MRIs(modified%20resnet50)/Images/LossGraph)
 
-![Image2](/Images/AccuracyGraph)
+![Image2](/Brain%20MRIs(modified%20resnet50)/Images/AccuracyGraph)
 
 woahhh!
 
@@ -94,9 +93,9 @@ My thoughts: decrease the learning rate and train over 1/2 epochs to see what ha
 New graphs produced with 0.001 lr:
 
 
-![Image3](/Images/LossGraph2)
+![Image3](/Brain%20MRIs(modified%20resnet50)/Images/LossGraph2)
 
-![Image4](/Images/AccuracyGraph2)
+![Image4](/Brain%20MRIs(modified%20resnet50)/Images/AccuracyGraph2)
 
 Looking at the metrics below the  accuracy tends towards 100%, but the loss function decreases very little, and the test loss even increases!
 
