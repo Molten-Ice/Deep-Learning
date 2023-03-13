@@ -1,24 +1,35 @@
 
 ## Development log
 
-Below I dicuss different results of the model, through
+Below I dicuss different results of the model, for different archiecture variations and learning iterations
 
 ## Model results
 
 Bigram model, after 0 & 5000 iterations: (7056 parameters):
+
 train data -> loss:4.9861, top@1: 1.0540%, top@5: 4.6292% | test data -> loss:4.9855, top@1: 1.0583%, top@5: 4.6293%
+
 train data -> loss:3.2754, top@1: 17.7066%, top@5: 48.9886% | test data -> loss:3.2744, top@1: 17.7488%, top@5: 48.9851%
 
 Transformer model
+
 For 1 block, 1 attention head of size 384, after 0, 1100 iterations: (1.93m parameters)
+
 train data -> loss:4.5776, top@1: 1.2049%, top@5: 6.3984% | test data -> loss:4.5780, top@1: 1.2048%, top@5: 6.3793%
+
 train data -> loss:1.7620, top@1: 46.8763%, top@5: 81.0912% | test data -> loss:1.7654, top@1: 46.7969%, top@5: 81.0229%
 
+
 For 1 block, 6 attention heads of size 64, after 0, 1100 & 2200 & 5000 iterations: (1.93m parameters)
+
 train data -> loss:4.6111, top@1: 0.9018%, top@5: 5.0043% | test data -> loss:4.6111, top@1: 0.9040%, top@5: 5.0030%
+
 train data -> loss:1.7689, top@1: 46.9523%, top@5: 80.9174% | test data -> loss:1.7663, top@1: 46.9904%, top@5: 80.9795%
+
 train data -> loss:1.5743, top@1: 52.2909%, top@5: 84.1496% | test data -> loss:1.5725, top@1: 52.3335%, top@5: 84.1816%
+
 train data -> loss:1.4126, top@1: 56.7107%, top@5: 86.2612% | test data -> loss:1.4141, top@1: 56.7039%, top@5: 86.2346%
+
 
 For 2 blocks, 6 attention heads of size 64, after 0, 1100 & 2200 & 5000 iterations: (3.71m parameters)
 train data -> loss:4.5676, top@1: 1.3751%, top@5: 6.5670% | test data -> loss:4.5679, top@1: 1.3753%, top@5: 6.5213%
