@@ -72,6 +72,11 @@ It is only creating the batches (xb, yb) inside the function thats causing the l
 I suspect its to do with dropout not be factored in as it should.
 After messing around with combinations of model.eval(), torch.inference_mode(), @torch.no_grad() I could not find a working combination
 
+# FIXED!!!
+# Many many issues with evaluation, incorrect results etc. 
+# All fixed when putting the initial data (which goes into get_batches) into a torch.Tensor.
+# i.e. data = torch.tensor(encoded_text, dtype=torch.long) ;)
+
 ERROR: Generations issue
 forward, x -> torch.Size([1, 2])
 te: torch.Size([1, 2, 384]) | pe: torch.Size([256, 384])
