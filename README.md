@@ -2,13 +2,15 @@
 
 # Projects:
 
-## [GPT]
+## [GPT from scratch](/GPT)
 
 ### To do
 
 - Parallelize the attention heads and compare the difference in running time
 - Expand from 2 blocks to 6 blocks, and compare the loss and accuracy
 - Create a ViT from scratch (essentially run Conv2d at the start, main structure remains untouched)
+
+## [ViT from scratch](/vit_from_scratch)
 
 ## [Leveraging autoencoders](/Leveraging%20autoencoders)
 
