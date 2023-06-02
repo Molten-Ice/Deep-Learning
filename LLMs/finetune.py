@@ -37,6 +37,7 @@ def train(
     learning_rate: float = 3e-4,
     cutoff_len: int = 256,
     val_set_size: float = 0.1,
+    eval_steps: int = 10,
     # lora hyperparams
     lora_r: int = 8,
     lora_alpha: int = 16,
@@ -244,7 +245,8 @@ def train(
             optim="adamw_torch",
             evaluation_strategy="steps" if val_set_size > 0 else "no",
             save_strategy="steps",
-            eval_steps=25 if val_set_size > 0 else None,
+            eval_steps = eval_steps if val_set_size > 0 else None,
+            logging_first_step = True,
             save_steps=200,
             output_dir=output_dir,
             save_total_limit=3,
@@ -259,7 +261,6 @@ def train(
         ),
     )
     model.config.use_cache = False
-
 
     if torch.__version__ >= "2" and sys.platform != "win32":
         model = torch.compile(model)
